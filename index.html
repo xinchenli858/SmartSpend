@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SmartSpend Pro - OOP Finance Controller Showcase</title>
+    <title>SmartSpend</title>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -14,10 +14,9 @@
             --text-main: #0f172a;
             --text-muted: #64748b;
             --border: #e2e8f0;
-            --success-bg: #dcfce7;
             --success-text: #16a34a;
-            --danger-bg: #fee2e2;
             --danger-text: #dc2626;
+            --warning-text: #d97706;
         }
 
         body {
@@ -36,28 +35,18 @@
             max-width: 1100px;
         }
 
-        /* Academic guidance header for admissions evaluation */
-        .portfolio-header {
-            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
-            padding: 24px;
-            border-radius: 12px;
+        /* Minimal title text */
+        .app-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--text-main);
             margin-bottom: 30px;
-            color: #ffffff;
-        }
-        .portfolio-header h2 { margin: 0 0 8px 0; font-size: 24px; font-weight: 700; }
-        .portfolio-header p { margin: 0; font-size: 14px; opacity: 0.95; line-height: 1.5; }
-        .badge {
-            display: inline-block;
-            background: rgba(255,255,255,0.2);
-            padding: 4px 10px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: 600;
-            margin-right: 8px;
-            margin-top: 10px;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 12px;
+            width: 100%;
         }
 
-        /* Two-column dashboard system layout */
+        /* Balanced layout */
         .dashboard-grid {
             display: grid;
             grid-template-columns: 420px 1fr;
@@ -67,27 +56,24 @@
 
         .card {
             background-color: var(--surface);
-            border-radius: 12px;
+            border-radius: 6px;
             padding: 24px;
             border: 1px solid var(--border);
-            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05);
             margin-bottom: 20px;
         }
 
-        h3 { margin-top: 0; color: var(--text-main); font-size: 16px; font-weight: 600; margin-bottom: 20px;}
+        h3 { margin-top: 0; color: var(--text-main); font-size: 14px; font-weight: 600; margin-bottom: 16px; text-transform: uppercase; letter-spacing: 0.5px;}
 
-        /* Strict input form layout definitions */
-        .form-group { margin-bottom: 16px; }
-        label { display: block; margin-bottom: 8px; font-size: 13px; color: var(--text-muted); font-weight: 500; }
+        .form-group { margin-bottom: 14px; }
+        label { display: block; margin-bottom: 6px; font-size: 12px; color: var(--text-muted); font-weight: 500; }
         input, select {
             width: 100%;
             padding: 10px 12px;
             background-color: #ffffff;
             border: 1px solid var(--border);
-            border-radius: 6px;
+            border-radius: 4px;
             color: var(--text-main);
-            font-size: 14px;
-            transition: all 0.2s;
+            font-size: 13px;
             box-sizing: border-box;
         }
         input:focus, select:focus { border-color: var(--primary); outline: none; }
@@ -98,67 +84,51 @@
             background-color: var(--primary);
             color: white;
             border: none;
-            border-radius: 6px;
-            font-size: 14px;
+            border-radius: 4px;
+            font-size: 13px;
             font-weight: 600;
             cursor: pointer;
-            transition: 0.1s;
         }
         button:hover { background-color: var(--primary-hover); }
 
-        /* Summary metadata layout panels */
-        .summary-banner {
-            display: flex;
-            gap: 20px;
-            margin-bottom: 24px;
-            background-color: #f1f5f9;
-            padding: 16px;
-            border-radius: 8px;
-            border: 1px solid var(--border);
-        }
-        .summary-item { flex: 1; }
-        .summary-label { font-size: 12px; color: var(--text-muted); font-weight: 500; }
-        .summary-value { font-size: 20px; font-weight: 700; margin-top: 4px; }
-
-        /* Master Budget Ledger Table configuration mirroring backend logic */
+        /* Master Data Tables styling */
         .master-table {
             width: 100%;
             border-collapse: collapse;
             text-align: left;
-            font-size: 14px;
+            font-size: 13px;
             margin-bottom: 24px;
         }
         .master-table th {
             background-color: #f8fafc;
             color: var(--text-muted);
             font-weight: 600;
-            padding: 12px;
-            border-bottom: 2px solid var(--border);
+            padding: 10px 12px;
+            border-bottom: 1px solid var(--border);
         }
         .master-table td {
             padding: 12px;
             border-bottom: 1px solid var(--border);
             color: var(--text-main);
         }
-        .status-pill {
-            display: inline-block;
-            padding: 2px 8px;
-            border-radius: 4px;
+        
+        .status-text {
             font-size: 12px;
             font-weight: 600;
         }
-        .status-pill.ok { background-color: var(--success-bg); color: var(--success-text); }
-        .status-pill.over { background-color: var(--danger-bg); color: var(--danger-text); }
+        .status-text.ok { color: var(--success-text); }
+        .status-text.over { color: var(--danger-text); }
+        .status-text.warn { color: var(--warning-text); }
 
-        /* Virtual console architecture for raw println stream capturing */
+        /* Clean Terminal Console */
         .terminal-box {
             background-color: #0f172a;
-            border-radius: 8px;
+            border-radius: 4px;
             padding: 14px;
             font-family: 'Courier New', Courier, monospace;
             font-size: 12px;
             color: #38bdf8;
-            height: 180px;
+            height: 160px;
             overflow-y: auto;
         }
         .terminal-line { margin-bottom: 4px; line-height: 1.4; }
@@ -168,97 +138,100 @@
 <body>
 
     <div class="container">
-        <div class="portfolio-header">
-            <h2>SmartSpend Pro: Dynamic Object-Oriented Portfolio</h2>
-            <p>This web application acts as the front-end interface mirroring the exact dynamic Object-Oriented architecture developed inside <strong>FinanceController.java</strong>, <strong>UserWallet.java</strong>, and <strong>BudgetCategory.java</strong> within BlueJ. It allows fully customized category creation, individual budget thresholds allocations, and automated threshold alerts execution.</p>
-            <div>
-                <span class="badge">Dynamic Object Creation</span>
-                <span class="badge">Custom Budget Limits</span>
-                <span class="badge">BlueJ Engine Adaptation</span>
-                <a href="https://github.com/xinchenli858/SmartSpend" target="_blank" style="color: #fff; font-size: 12px; font-weight:600; margin-left: 15px; text-decoration: underline;">View Java Source Code →</a>
-            </div>
-        </div>
+        <div class="app-title">SmartSpend</div>
 
         <div class="dashboard-grid">
             
             <div>
                 <div class="card">
-                    <h3>Step 1: Initialize UserWallet Context</h3>
+                    <h3>Step 1: Initialize UserWallet</h3>
                     <div class="form-group">
-                        <label>Set Monthly Savings Goal / Initial Wallet Balance ($)</label>
-                        <div style="display: flex; gap: 8px;">
-                            <input type="number" id="walletInit" placeholder="e.g. 2000">
-                            <button style="width: auto; white-space: nowrap;" onclick="initWallet()">Initialize</button>
-                        </div>
+                        <label>Initial Account Balance ($)</label>
+                        <input type="number" id="walletBalanceInput" placeholder="e.g. 5000">
                     </div>
+                    <div class="form-group">
+                        <label>Monthly Savings Target Goal ($)</label>
+                        <input type="number" id="walletGoalInput" placeholder="e.g. 2000">
+                    </div>
+                    <button onclick="initWallet()">Initialize Wallet</button>
                 </div>
 
                 <div class="card">
-                    <h3>Step 2: Create Custom BudgetCategory Instances</h3>
+                    <h3>Step 2: Create BudgetCategory</h3>
                     <div class="form-group">
-                        <label>New Category Name</label>
-                        <input type="text" id="newCatName" placeholder="e.g. Rent, Groceries, Travel">
+                        <label>Category Name</label>
+                        <input type="text" id="newCatName" placeholder="e.g. Rent, Groceries">
                     </div>
                     <div class="form-group">
-                        <label>Assigned Budget Allocation Cap ($)</label>
-                        <input type="number" id="newCatBudget" placeholder="e.g. 500">
+                        <label>Budget Allocation Cap ($)</label>
+                        <input type="number" id="newCatBudget" placeholder="e.g. 400">
                     </div>
-                    <button onclick="createCategory()">Instantiate Category Object</button>
+                    <button onclick="createCategory()">Create Category</button>
                 </div>
 
                 <div class="card">
-                    <h3>Step 3: Dispatch Transaction Record</h3>
+                    <h3>Step 3: Log Transaction</h3>
                     <div class="form-group">
                         <label>Transaction Amount ($)</label>
                         <input type="number" id="txAmount" placeholder="0.00">
                     </div>
                     <div class="form-group">
-                        <label>Select Category Object Reference</label>
+                        <label>Target Category</label>
                         <select id="txCategory">
                             <option value="" disabled selected>-- Create a category first --</option>
                         </select>
                     </div>
-                    <button onclick="processTransaction()">Execute Transaction</button>
+                    <button onclick="processTransaction()">Log Transaction</button>
                 </div>
             </div>
 
             <div>
                 <div class="card">
-                    <h3>Master Budget Ledger Table</h3>
-                    
-                    <div class="summary-banner">
-                        <div class="summary-item">
-                            <div class="summary-label">Remaining Wallet Balance</div>
-                            <div class="summary-value" id="valBalance">$0.00</div>
-                        </div>
-                        <div class="summary-item">
-                            <div class="summary-label">Total Expenses Accumulated</div>
-                            <div class="summary-value" id="valExpenses" style="color: var(--text-main);">$0.00</div>
-                        </div>
-                    </div>
-
+                    <h3>UserWallet Capital Metrics</h3>
                     <table class="master-table">
                         <thead>
                             <tr>
-                                <th>Category Object</th>
-                                <th>Budget Cap ($)</th>
-                                <th>Total Spent ($)</th>
-                                <th>Remaining ($)</th>
-                                <th>Operational Status</th>
+                                <th>Initial Balance</th>
+                                <th>Total Expenses</th>
+                                <th>Current Balance</th>
+                                <th>Target Savings</th>
+                                <th>Target Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td id="lblInitBalance">$0.00</td>
+                                <td id="lblTotalExpenses">$0.00</td>
+                                <td id="lblRemainingBalance" style="font-weight: 600;">$0.00</td>
+                                <td id="lblSavingsGoal">$0.00</td>
+                                <td><span id="lblWalletStatus" class="status-text warn">Uninitialized</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h3>Master Budget Categories Matrix</h3>
+                    <table class="master-table">
+                        <thead>
+                            <tr>
+                                <th>Category Key</th>
+                                <th>Budget Cap</th>
+                                <th>Total Spent</th>
+                                <th>Remaining Limit</th>
+                                <th>Budget Status</th>
                             </tr>
                         </thead>
                         <tbody id="masterTableBody">
                             <tr>
-                                <td colspan="5" style="text-align: center; color: var(--text-muted); padding: 20px;">
-                                    No category instances instantiated yet. Complete Step 2.
+                                <td colspan="5" style="text-align: center; color: var(--text-muted); padding: 16px;">
+                                    No dynamic category elements active.
                                 </td>
                             </tr>
                         </tbody>
                     </table>
 
-                    <label style="margin-bottom: 8px; display: block;">Java Virtual Machine (JVM) Live Execution Log</label>
+                    <label style="margin-bottom: 6px; display: block; font-size: 12px; font-weight: 600; color: var(--text-muted);">JVM CONSOLE OUTPUT</label>
                     <div class="terminal-box" id="terminal">
-                        <div class="terminal-line">[JVM] System initialized. Awaiting User Wallet initialization...</div>
+                        <div class="terminal-line">[JVM] System initialized. Awaiting pipeline instruction inputs...</div>
                     </div>
                 </div>
             </div>
@@ -267,16 +240,15 @@
     </div>
 
     <script>
-        // Internal application core tracking records
-        let walletBalance = 0;
-        let initialSavingsGoal = 0;
-        let totalSpent = 0;
+        // Core Logic Mappings
+        let initialBalance = 0;
+        let savingsGoal = 0;
+        let currentRemaining = 0;
+        let totalExpenses = 0;
         
-        // Structured memory mappings to synchronize categories properties records
         let categoryBudgets = {};
         let categorySpent = {};
 
-        // System print line execution engine
         function logToTerminal(text, isErr = false) {
             const term = document.getElementById('terminal');
             const time = new Date().toLocaleTimeString();
@@ -287,31 +259,37 @@
             term.scrollTop = term.scrollHeight;
         }
 
-        // Executes structural mapping for wallet tracking data arrays
         function initWallet() {
-            const val = parseFloat(document.getElementById('walletInit').value);
-            if (!val || val <= 0) {
-                logToTerminal("CRITICAL ERROR: Invalid initialization token. Balance must be > 0.", true);
+            const balanceVal = parseFloat(document.getElementById('walletBalanceInput').value);
+            const goalVal = parseFloat(document.getElementById('walletGoalInput').value);
+
+            if (isNaN(balanceVal) || balanceVal <= 0) {
+                logToTerminal("ERROR: Initialization balance must be greater than zero.", true);
                 return;
             }
-            initialSavingsGoal = val;
-            walletBalance = val;
-            totalSpent = 0;
+            if (isNaN(goalVal) || goalVal < 0) {
+                logToTerminal("ERROR: Savings target verification threshold cannot be negative.", true);
+                return;
+            }
+
+            initialBalance = balanceVal;
+            savingsGoal = goalVal;
+            currentRemaining = balanceVal;
+            totalExpenses = 0;
             
             categoryBudgets = {};
             categorySpent = {};
-            document.getElementById('txCategory').innerHTML = '<option value="" disabled selected>-- Select Custom Category --</option>';
+            document.getElementById('txCategory').innerHTML = '<option value="" disabled selected>-- Select Target --</option>';
 
-            logToTerminal(`SUCCESS: UserWallet instance instantiated in system heap memory.`);
-            logToTerminal(`[UserWallet] Savings target mapped to $${val.toFixed(2)}. Ready for Category bindings.`);
+            logToTerminal(`SUCCESS: UserWallet instance allocated.`);
+            logToTerminal(`[UserWallet] Initial Balance: $${balanceVal.toFixed(2)} | Target Goal: $${goalVal.toFixed(2)}`);
             
             updateUI();
         }
 
-        // Replicates instantiation actions matching Java category specifications
         function createCategory() {
-            if (initialSavingsGoal === 0) {
-                logToTerminal("EXECUTION FAILED: Main wallet context missing. Complete Step 1.", true);
+            if (initialBalance === 0) {
+                logToTerminal("ERROR: System uninitialized. Execute Step 1 first.", true);
                 return;
             }
 
@@ -319,11 +297,11 @@
             const catBudget = parseFloat(document.getElementById('newCatBudget').value);
 
             if (!catName) {
-                logToTerminal("VALIDATION ERROR: Category mapping description code cannot be empty.", true);
+                logToTerminal("ERROR: Category identifier cannot be empty.", true);
                 return;
             }
-            if (!catBudget || catBudget <= 0) {
-                logToTerminal("VALUATION ERROR: Budget cap registration criteria must be positive.", true);
+            if (isNaN(catBudget) || catBudget <= 0) {
+                logToTerminal("ERROR: Assigned budget cap must be positive.", true);
                 return;
             }
 
@@ -332,7 +310,6 @@
                 categorySpent[catName] = 0;
             }
 
-            // Sync structural selection drop-downs
             const dropdown = document.getElementById('txCategory');
             let exists = false;
             for (let i = 0; i < dropdown.options.length; i++) {
@@ -346,7 +323,7 @@
                 dropdown.appendChild(opt);
             }
 
-            logToTerminal(`[BudgetCategory] Object structural reference bound: 'new BudgetCategory("${catName}", ${catBudget})'.`);
+            logToTerminal(`[BudgetCategory] New object reference initialized: "${catName}" with cap $${catBudget}`);
             
             document.getElementById('newCatName').value = '';
             document.getElementById('newCatBudget').value = '';
@@ -354,10 +331,9 @@
             updateUI();
         }
 
-        // Mutation calculations corresponding to structural transactional logic elements
         function processTransaction() {
-            if (initialSavingsGoal === 0) {
-                logToTerminal("EXECUTION FAILED: Active wallet session context absent.", true);
+            if (initialBalance === 0) {
+                logToTerminal("ERROR: Active runtime wallet session not found.", true);
                 return;
             }
 
@@ -365,44 +341,55 @@
             const cat = document.getElementById('txCategory').value;
 
             if (!cat) {
-                logToTerminal("EXECUTION FAILED: Missing active collection reference object context destination.", true);
+                logToTerminal("ERROR: No active collection reference object selected.", true);
                 return;
             }
-            if (!amt || amt <= 0) {
-                logToTerminal("VALUATION ERROR: Transaction processing input criteria must be positive value.", true);
+            if (isNaN(amt) || amt <= 0) {
+                logToTerminal("ERROR: Mutation value parameter requirements must be positive.", true);
                 return;
             }
 
-            walletBalance -= amt;
-            totalSpent += amt;
+            currentRemaining -= amt;
+            totalExpenses += amt;
             categorySpent[cat] += amt;
 
-            logToTerminal(`[Transaction] Mutated: Deducted $${amt.toFixed(2)} from Category target object context [${cat}].`);
+            logToTerminal(`[Transaction] Deducted $${amt.toFixed(2)} allocated against context [${cat}].`);
 
             if (categorySpent[cat] > categoryBudgets[cat]) {
-                logToTerminal(`⚠️ CRITICAL WARNING: Category [${cat}] has broken its allocated safe budget ceiling threshold of $${categoryBudgets[cat].toFixed(2)}!`, true);
-            } else if (categorySpent[cat] > categoryBudgets[cat] * 0.8) {
-                logToTerminal(`[Alert] Category [${cat}] usage metric expanded beyond 80% ceiling. Log recorded.`);
+                logToTerminal(`WARNING: Category [${cat}] has exceeded its assigned safe budget limit of $${categoryBudgets[cat].toFixed(2)}!`, true);
             }
 
-            if (walletBalance < 0) {
-                logToTerminal(`❌ CRITICAL RISK: Structural liquid balance deficit recorded inside core environment. Balance below zero!`, true);
+            if (currentRemaining < savingsGoal) {
+                logToTerminal(`ALERT: Total wallet remaining balance has dropped below defined savings goal targets!`, true);
             }
 
             document.getElementById('txAmount').value = '';
             updateUI();
         }
 
-        // Direct synchronization rendering engine mapping tracking matrices back to Master Table DOM rows
         function updateUI() {
-            document.getElementById('valBalance').innerText = `$${walletBalance.toFixed(2)}`;
-            document.getElementById('valExpenses').innerText = `$${totalSpent.toFixed(2)}`;
+            document.getElementById('lblInitBalance').innerText = `$${initialBalance.toFixed(2)}`;
+            document.getElementById('lblTotalExpenses').innerText = `$${totalExpenses.toFixed(2)}`;
+            document.getElementById('lblRemainingBalance').innerText = `$${currentRemaining.toFixed(2)}`;
+            document.getElementById('lblSavingsGoal').innerText = `$${savingsGoal.toFixed(2)}`;
+
+            const walletStatusPill = document.getElementById('lblWalletStatus');
+            if (initialBalance === 0) {
+                walletStatusPill.className = "status-text warn";
+                walletStatusPill.innerText = "Uninitialized";
+            } else if (currentRemaining >= savingsGoal) {
+                walletStatusPill.className = "status-text ok";
+                walletStatusPill.innerText = "Goal Met";
+            } else {
+                walletStatusPill.className = "status-text over";
+                walletStatusPill.innerText = "Shortfall";
+            }
 
             const tbody = document.getElementById('masterTableBody');
             const categories = Object.keys(categoryBudgets);
 
             if (categories.length === 0) {
-                tbody.innerHTML = `<tr><td colspan="5" style="text-align: center; color: var(--text-muted); padding: 20px;">No category instances instantiated yet. Complete Step 2.</td></tr>`;
+                tbody.innerHTML = `<tr><td colspan="5" style="text-align: center; color: var(--text-muted); padding: 16px;">No dynamic category elements active.</td></tr>`;
                 return;
             }
 
@@ -413,7 +400,7 @@
                 const remaining = budget - spent;
                 
                 const isOver = spent > budget;
-                const statusClass = isOver ? 'status-pill over' : 'status-pill ok';
+                const statusClass = isOver ? 'status-text over' : 'status-text ok';
                 const statusText = isOver ? 'Over Budget' : 'Within Budget';
 
                 const row = document.createElement('tr');
