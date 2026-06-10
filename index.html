@@ -3,11 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SmartSpend Pro - Advanced Portfolio Showcase</title>
+    <title>SmartSpend Pro - OOP Finance Controller Showcase</title>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
-        /* Light Mode Color Palette variables */
         :root {
             --primary: #4f46e5;
             --primary-hover: #4338ca;
@@ -15,10 +13,11 @@
             --surface: #ffffff;
             --text-main: #0f172a;
             --text-muted: #64748b;
-            --success: #10b981;
-            --danger: #ef4444;
-            --warning: #f59e0b;
             --border: #e2e8f0;
+            --success-bg: #dcfce7;
+            --success-text: #16a34a;
+            --danger-bg: #fee2e2;
+            --danger-text: #dc2626;
         }
 
         body {
@@ -34,16 +33,15 @@
 
         .container {
             width: 100%;
-            max-width: 1000px;
+            max-width: 1100px;
         }
 
-        /* Portfolio header tailored for admissions officers to show the tech stack */
+        /* Academic guidance header for admissions evaluation */
         .portfolio-header {
             background: linear-gradient(135deg, #3b82f6, #8b5cf6);
             padding: 24px;
-            border-radius: 16px;
+            border-radius: 12px;
             margin-bottom: 30px;
-            box-shadow: 0 10px 25px -5px rgba(59, 130, 246, 0.15);
             color: #ffffff;
         }
         .portfolio-header h2 { margin: 0 0 8px 0; font-size: 24px; font-weight: 700; }
@@ -59,103 +57,123 @@
             margin-top: 10px;
         }
 
-        /* Core Dashboard Layout */
+        /* Two-column dashboard system layout */
         .dashboard-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: 420px 1fr;
             gap: 24px;
         }
-        @media (max-width: 768px) { .dashboard-grid { grid-template-columns: 1fr; } }
+        @media (max-width: 900px) { .dashboard-grid { grid-template-columns: 1fr; } }
 
         .card {
             background-color: var(--surface);
-            border-radius: 16px;
+            border-radius: 12px;
             padding: 24px;
             border: 1px solid var(--border);
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05);
+            margin-bottom: 20px;
         }
 
-        h3 { margin-top: 0; color: var(--text-main); font-size: 18px; font-weight: 600; margin-bottom: 20px;}
+        h3 { margin-top: 0; color: var(--text-main); font-size: 16px; font-weight: 600; margin-bottom: 20px;}
 
-        /* Input Form Elements */
+        /* Strict input form layout definitions */
         .form-group { margin-bottom: 16px; }
-        label { display: block; margin-bottom: 8px; font-size: 14px; color: var(--text-muted); font-weight: 500; }
+        label { display: block; margin-bottom: 8px; font-size: 13px; color: var(--text-muted); font-weight: 500; }
         input, select {
             width: 100%;
-            padding: 12px;
+            padding: 10px 12px;
             background-color: #ffffff;
             border: 1px solid var(--border);
-            border-radius: 8px;
+            border-radius: 6px;
             color: var(--text-main);
             font-size: 14px;
-            transition: all 0.3s;
+            transition: all 0.2s;
             box-sizing: border-box;
         }
-        input:focus, select:focus { border-color: var(--primary); outline: none; box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1); }
+        input:focus, select:focus { border-color: var(--primary); outline: none; }
 
         button {
             width: 100%;
-            padding: 12px;
+            padding: 11px;
             background-color: var(--primary);
             color: white;
             border: none;
-            border-radius: 8px;
-            font-size: 15px;
+            border-radius: 6px;
+            font-size: 14px;
             font-weight: 600;
             cursor: pointer;
-            transition: 0.2s;
+            transition: 0.1s;
         }
-        button:hover { background-color: var(--primary-hover); transform: translateY(-1px); }
+        button:hover { background-color: var(--primary-hover); }
 
-        /* Financial Analytics Metrics Panels */
-        .stats-container {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 16px;
-            margin-bottom: 20px;
-        }
-        .stat-box {
+        /* Summary metadata layout panels */
+        .summary-banner {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 24px;
             background-color: #f1f5f9;
             padding: 16px;
-            border-radius: 12px;
-            text-align: center;
+            border-radius: 8px;
             border: 1px solid var(--border);
         }
-        .stat-val { font-size: 22px; font-weight: 700; margin-top: 4px; }
-        .stat-val.safe { color: var(--success); }
-        .stat-val.warning { color: var(--warning); }
-        .stat-val.danger { color: var(--danger); }
+        .summary-item { flex: 1; }
+        .summary-label { font-size: 12px; color: var(--text-muted); font-weight: 500; }
+        .summary-value { font-size: 20px; font-weight: 700; margin-top: 4px; }
 
-        /* Simulated Console Output Box - Mirrors Java System.out.println() behavior */
+        /* Master Budget Ledger Table configuration mirroring backend logic */
+        .master-table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+            font-size: 14px;
+            margin-bottom: 24px;
+        }
+        .master-table th {
+            background-color: #f8fafc;
+            color: var(--text-muted);
+            font-weight: 600;
+            padding: 12px;
+            border-bottom: 2px solid var(--border);
+        }
+        .master-table td {
+            padding: 12px;
+            border-bottom: 1px solid var(--border);
+            color: var(--text-main);
+        }
+        .status-pill {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        .status-pill.ok { background-color: var(--success-bg); color: var(--success-text); }
+        .status-pill.over { background-color: var(--danger-bg); color: var(--danger-text); }
+
+        /* Virtual console architecture for raw println stream capturing */
         .terminal-box {
             background-color: #0f172a;
-            border-radius: 12px;
-            padding: 16px;
+            border-radius: 8px;
+            padding: 14px;
             font-family: 'Courier New', Courier, monospace;
-            font-size: 13px;
+            font-size: 12px;
             color: #38bdf8;
-            height: 150px;
+            height: 180px;
             overflow-y: auto;
         }
-        .terminal-line { margin-bottom: 6px; line-height: 1.4; }
+        .terminal-line { margin-bottom: 4px; line-height: 1.4; }
         .terminal-err { color: #f87171; }
-
-        .chart-container {
-            position: relative;
-            margin-top: 20px;
-            height: 220px;
-        }
     </style>
 </head>
 <body>
 
     <div class="container">
         <div class="portfolio-header">
-            <h2>🌱 SmartSpend Pro: Portfolio Application</h2>
-            <p>This web application acts as the front-end interface mirroring the Object-Oriented core logic developed inside <strong>FinanceController.java</strong>, <strong>UserWallet.java</strong>, and <strong>BudgetCategory.java</strong> within BlueJ. Simulating data binding, spending alert thresholds, and state persistence.</p>
+            <h2>SmartSpend Pro: Dynamic Object-Oriented Portfolio</h2>
+            <p>This web application acts as the front-end interface mirroring the exact dynamic Object-Oriented architecture developed inside <strong>FinanceController.java</strong>, <strong>UserWallet.java</strong>, and <strong>BudgetCategory.java</strong> within BlueJ. It allows fully customized category creation, individual budget thresholds allocations, and automated threshold alerts execution.</p>
             <div>
-                <span class="badge">Object-Oriented Design</span>
-                <span class="badge">Data Visualization</span>
+                <span class="badge">Dynamic Object Creation</span>
+                <span class="badge">Custom Budget Limits</span>
                 <span class="badge">BlueJ Engine Adaptation</span>
                 <a href="https://github.com/xinchenli858/SmartSpend" target="_blank" style="color: #fff; font-size: 12px; font-weight:600; margin-left: 15px; text-decoration: underline;">View Java Source Code →</a>
             </div>
@@ -163,58 +181,85 @@
 
         <div class="dashboard-grid">
             
-            <div class="card">
-                <h3>🎮 App Controller (User Input)</h3>
-                
-                <div class="form-group">
-                    <label>Set Monthly Savings Goal / Initial Wallet Balance ($)</label>
-                    <div style="display: flex; gap: 10px;">
-                        <input type="number" id="walletInit" placeholder="e.g. 2000">
-                        <button style="width: auto; white-space: nowrap;" onclick="initWallet()">Initialize</button>
+            <div>
+                <div class="card">
+                    <h3>Step 1: Initialize UserWallet Context</h3>
+                    <div class="form-group">
+                        <label>Set Monthly Savings Goal / Initial Wallet Balance ($)</label>
+                        <div style="display: flex; gap: 8px;">
+                            <input type="number" id="walletInit" placeholder="e.g. 2000">
+                            <button style="width: auto; white-space: nowrap;" onclick="initWallet()">Initialize</button>
+                        </div>
                     </div>
                 </div>
 
-                <hr style="border: 0; border-top: 1px solid var(--border); margin: 20px 0;">
-
-                <div class="form-group">
-                    <label>Transaction Amount ($)</label>
-                    <input type="number" id="txAmount" placeholder="0.00">
+                <div class="card">
+                    <h3>Step 2: Create Custom BudgetCategory Instances</h3>
+                    <div class="form-group">
+                        <label>New Category Name</label>
+                        <input type="text" id="newCatName" placeholder="e.g. Rent, Groceries, Travel">
+                    </div>
+                    <div class="form-group">
+                        <label>Assigned Budget Allocation Cap ($)</label>
+                        <input type="number" id="newCatBudget" placeholder="e.g. 500">
+                    </div>
+                    <button onclick="createCategory()">Instantiate Category Object</button>
                 </div>
 
-                <div class="form-group">
-                    <label>Budget Category (from BudgetCategory.java)</label>
-                    <select id="txCategory">
-                        <option value="Food">Food (Cap: 40% of wallet)</option>
-                        <option value="Utilities">Utilities (Cap: 30% of wallet)</option>
-                        <option value="Entertainment">Entertainment (Cap: 20% of wallet)</option>
-                        <option value="Other">Other (Cap: 10% of wallet)</option>
-                    </select>
+                <div class="card">
+                    <h3>Step 3: Dispatch Transaction Record</h3>
+                    <div class="form-group">
+                        <label>Transaction Amount ($)</label>
+                        <input type="number" id="txAmount" placeholder="0.00">
+                    </div>
+                    <div class="form-group">
+                        <label>Select Category Object Reference</label>
+                        <select id="txCategory">
+                            <option value="" disabled selected>-- Create a category first --</option>
+                        </select>
+                    </div>
+                    <button onclick="processTransaction()">Execute Transaction</button>
                 </div>
-
-                <button onclick="processTransaction()">Execute Transaction</button>
             </div>
 
-            <div class="card">
-                <h3>📊 Financial Analytics Dashboard</h3>
-                
-                <div class="stats-container">
-                    <div class="stat-box">
-                        <div style="font-size: 12px; color: var(--text-muted);">Remaining Wallet Balance</div>
-                        <div class="stat-val safe" id="valBalance">$0.00</div>
+            <div>
+                <div class="card">
+                    <h3>Master Budget Ledger Table</h3>
+                    
+                    <div class="summary-banner">
+                        <div class="summary-item">
+                            <div class="summary-label">Remaining Wallet Balance</div>
+                            <div class="summary-value" id="valBalance">$0.00</div>
+                        </div>
+                        <div class="summary-item">
+                            <div class="summary-label">Total Expenses Accumulated</div>
+                            <div class="summary-value" id="valExpenses" style="color: var(--text-main);">$0.00</div>
+                        </div>
                     </div>
-                    <div class="stat-box">
-                        <div style="font-size: 12px; color: var(--text-muted);">Total Expenses Accumulated</div>
-                        <div class="stat-val" id="valExpenses" style="color: var(--text-main);">$0.00</div>
+
+                    <table class="master-table">
+                        <thead>
+                            <tr>
+                                <th>Category Object</th>
+                                <th>Budget Cap ($)</th>
+                                <th>Total Spent ($)</th>
+                                <th>Remaining ($)</th>
+                                <th>Operational Status</th>
+                            </tr>
+                        </thead>
+                        <tbody id="masterTableBody">
+                            <tr>
+                                <td colspan="5" style="text-align: center; color: var(--text-muted); padding: 20px;">
+                                    No category instances instantiated yet. Complete Step 2.
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <label style="margin-bottom: 8px; display: block;">Java Virtual Machine (JVM) Live Execution Log</label>
+                    <div class="terminal-box" id="terminal">
+                        <div class="terminal-line">[JVM] System initialized. Awaiting User Wallet initialization...</div>
                     </div>
-                </div>
-
-                <label>🖥️ Java Virtual Machine (JVM) Live Execution Log</label>
-                <div class="terminal-box" id="terminal">
-                    <div class="terminal-line">[JVM] System initialized. Awaiting User Wallet initialization...</div>
-                </div>
-
-                <div class="chart-container">
-                    <canvas id="budgetChart"></canvas>
                 </div>
             </div>
 
@@ -222,18 +267,16 @@
     </div>
 
     <script>
-        // Data models mapping the Java backend state variables
+        // Internal application core tracking records
         let walletBalance = 0;
         let initialSavingsGoal = 0;
         let totalSpent = 0;
         
-        // Budget cap mapping synchronized with the BudgetCategory.java limits
-        let categoryBudgets = { Food: 0, Utilities: 0, Entertainment: 0, Other: 0 };
-        let categorySpent = { Food: 0, Utilities: 0, Entertainment: 0, Other: 0 };
+        // Structured memory mappings to synchronize categories properties records
+        let categoryBudgets = {};
+        let categorySpent = {};
 
-        let chart = null;
-
-        // Formats and appends system output directly onto the mock UI console
+        // System print line execution engine
         function logToTerminal(text, isErr = false) {
             const term = document.getElementById('terminal');
             const time = new Date().toLocaleTimeString();
@@ -244,7 +287,7 @@
             term.scrollTop = term.scrollHeight;
         }
 
-        // Simulates OO constructor initialization when creating UserWallet instances
+        // Executes structural mapping for wallet tracking data arrays
         function initWallet() {
             const val = parseFloat(document.getElementById('walletInit').value);
             if (!val || val <= 0) {
@@ -254,117 +297,135 @@
             initialSavingsGoal = val;
             walletBalance = val;
             totalSpent = 0;
+            
+            categoryBudgets = {};
+            categorySpent = {};
+            document.getElementById('txCategory').innerHTML = '<option value="" disabled selected>-- Select Custom Category --</option>';
 
-            // Replicates the automatic percentage-based budget distribution architecture
-            categoryBudgets.Food = val * 0.4;
-            categoryBudgets.Utilities = val * 0.3;
-            categoryBudgets.Entertainment = val * 0.2;
-            categoryBudgets.Other = val * 0.1;
-
-            for (let k in categorySpent) categorySpent[k] = 0;
-
-            logToTerminal(`SUCCESS: UserWallet instance instantiated successfully.`);
-            logToTerminal(`[BudgetCategory] Category limits mapped: Food($${categoryBudgets.Food}), Utilities($${categoryBudgets.Utilities}), Ent.($${categoryBudgets.Entertainment})`);
+            logToTerminal(`SUCCESS: UserWallet instance instantiated in system heap memory.`);
+            logToTerminal(`[UserWallet] Savings target mapped to $${val.toFixed(2)}. Ready for Category bindings.`);
             
             updateUI();
         }
 
-        // Processes monetary ledger modification mirroring Transaction.java actions
+        // Replicates instantiation actions matching Java category specifications
+        function createCategory() {
+            if (initialSavingsGoal === 0) {
+                logToTerminal("EXECUTION FAILED: Main wallet context missing. Complete Step 1.", true);
+                return;
+            }
+
+            const catName = document.getElementById('newCatName').value.trim();
+            const catBudget = parseFloat(document.getElementById('newCatBudget').value);
+
+            if (!catName) {
+                logToTerminal("VALIDATION ERROR: Category mapping description code cannot be empty.", true);
+                return;
+            }
+            if (!catBudget || catBudget <= 0) {
+                logToTerminal("VALUATION ERROR: Budget cap registration criteria must be positive.", true);
+                return;
+            }
+
+            categoryBudgets[catName] = catBudget;
+            if (!(catName in categorySpent)) {
+                categorySpent[catName] = 0;
+            }
+
+            // Sync structural selection drop-downs
+            const dropdown = document.getElementById('txCategory');
+            let exists = false;
+            for (let i = 0; i < dropdown.options.length; i++) {
+                if (dropdown.options[i].value === catName) { exists = true; break; }
+            }
+
+            if (!exists) {
+                const opt = document.createElement('option');
+                opt.value = catName;
+                opt.innerText = catName;
+                dropdown.appendChild(opt);
+            }
+
+            logToTerminal(`[BudgetCategory] Object structural reference bound: 'new BudgetCategory("${catName}", ${catBudget})'.`);
+            
+            document.getElementById('newCatName').value = '';
+            document.getElementById('newCatBudget').value = '';
+            
+            updateUI();
+        }
+
+        // Mutation calculations corresponding to structural transactional logic elements
         function processTransaction() {
-            if (walletBalance === 0) {
-                logToTerminal("EXECUTION FAILED: Active wallet session not found. Please trigger initialization.", true);
+            if (initialSavingsGoal === 0) {
+                logToTerminal("EXECUTION FAILED: Active wallet session context absent.", true);
                 return;
             }
 
             const amt = parseFloat(document.getElementById('txAmount').value);
             const cat = document.getElementById('txCategory').value;
 
+            if (!cat) {
+                logToTerminal("EXECUTION FAILED: Missing active collection reference object context destination.", true);
+                return;
+            }
             if (!amt || amt <= 0) {
-                logToTerminal("VALUATION ERROR: Transaction record amount must be positive.", true);
+                logToTerminal("VALUATION ERROR: Transaction processing input criteria must be positive value.", true);
                 return;
             }
 
-            // Execute local state mutations mirroring object logic
             walletBalance -= amt;
             totalSpent += amt;
             categorySpent[cat] += amt;
 
-            logToTerminal(`[Transaction] Dispatched: Deducted $${amt.toFixed(2)} for Category [${cat}].`);
+            logToTerminal(`[Transaction] Mutated: Deducted $${amt.toFixed(2)} from Category target object context [${cat}].`);
 
-            // Core safety conditional checking thresholds defined in source classes
             if (categorySpent[cat] > categoryBudgets[cat]) {
-                logToTerminal(`⚠️ BUDGET WARNING: Category [${cat}] has exceeded its assigned threshold safety cap of $${categoryBudgets[cat].toFixed(2)}!`, true);
+                logToTerminal(`⚠️ CRITICAL WARNING: Category [${cat}] has broken its allocated safe budget ceiling threshold of $${categoryBudgets[cat].toFixed(2)}!`, true);
             } else if (categorySpent[cat] > categoryBudgets[cat] * 0.8) {
-                logToTerminal(`[Alert] Category [${cat}] usage reached 80% of safety limit. Monitor closely.`);
+                logToTerminal(`[Alert] Category [${cat}] usage metric expanded beyond 80% ceiling. Log recorded.`);
             }
 
             if (walletBalance < 0) {
-                logToTerminal(`❌ CRITICAL RISK: Total wallet liquidity compromised! Balance dropped below zero!`, true);
+                logToTerminal(`❌ CRITICAL RISK: Structural liquid balance deficit recorded inside core environment. Balance below zero!`, true);
             }
 
             document.getElementById('txAmount').value = '';
             updateUI();
         }
 
-        // Synchronizes internal transactional arrays with DOM elements
+        // Direct synchronization rendering engine mapping tracking matrices back to Master Table DOM rows
         function updateUI() {
-            const balElement = document.getElementById('valBalance');
-            balElement.innerText = `$${walletBalance.toFixed(2)}`;
+            document.getElementById('valBalance').innerText = `$${walletBalance.toFixed(2)}`;
             document.getElementById('valExpenses').innerText = `$${totalSpent.toFixed(2)}`;
 
-            if (walletBalance < 0) {
-                balElement.className = "stat-val danger";
-            } else if (walletBalance < initialSavingsGoal * 0.2) {
-                balElement.className = "stat-val warning";
-            } else {
-                balElement.className = "stat-val safe";
+            const tbody = document.getElementById('masterTableBody');
+            const categories = Object.keys(categoryBudgets);
+
+            if (categories.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="5" style="text-align: center; color: var(--text-muted); padding: 20px;">No category instances instantiated yet. Complete Step 2.</td></tr>`;
+                return;
             }
 
-            renderChart();
-        }
+            tbody.innerHTML = '';
+            categories.forEach(cat => {
+                const budget = categoryBudgets[cat];
+                const spent = categorySpent[cat];
+                const remaining = budget - spent;
+                
+                const isOver = spent > budget;
+                const statusClass = isOver ? 'status-pill over' : 'status-pill ok';
+                const statusText = isOver ? 'Over Budget' : 'Within Budget';
 
-        // Renders visual data graphs using the canvas engine
-        function renderChart() {
-            const ctx = document.getElementById('budgetChart').getContext('2d');
-            
-            const data = {
-                labels: ['Food', 'Utilities', 'Entertainment', 'Other'],
-                datasets: [
-                    {
-                        label: 'Spent ($)',
-                        data: [categorySpent.Food, categorySpent.Utilities, categorySpent.Entertainment, categorySpent.Other],
-                        backgroundColor: '#ef4444',
-                        borderRadius: 6
-                    },
-                    {
-                        label: 'Budget Limit ($)',
-                        data: [categoryBudgets.Food, categoryBudgets.Utilities, categoryBudgets.Entertainment, categoryBudgets.Other],
-                        backgroundColor: '#4f46e5',
-                        borderRadius: 6
-                    }
-                ]
-            };
-
-            if (chart) {
-                chart.data = data;
-                chart.update();
-            } else {
-                chart = new Chart(ctx, {
-                    type: 'bar',
-                    data: data,
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        plugins: {
-                            legend: { labels: { color: '#64748b', font: { family: 'Plus Jakarta Sans' } } }
-                        },
-                        scales: {
-                            x: { grid: { display: false }, ticks: { color: '#64748b' } },
-                            y: { grid: { color: '#e2e8f0' }, ticks: { color: '#64748b' } }
-                        }
-                    }
-                });
-            }
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td style="font-weight: 500;">${cat}</td>
+                    <td>$${budget.toFixed(2)}</td>
+                    <td>$${spent.toFixed(2)}</td>
+                    <td style="color: ${remaining < 0 ? 'var(--danger-text)' : 'inherit'}; font-weight: 500;">$${remaining.toFixed(2)}</td>
+                    <td><span class="${statusClass}">${statusText}</span></td>
+                `;
+                tbody.appendChild(row);
+            });
         }
     </script>
 </body>
