@@ -1,6 +1,8 @@
 # SmartSpend
 A Java-based personal finance tracking system that helps users manage income, expenses, and custom budgets with real-time financial reports and spending alerts.
 
+✨ Online Use: https://xinchenli858.github.io/SmartSpend/
+
 Unlike simple expense trackers, SmartSpend simulates a real financial system by allowing users to create custom budget categories, monitor spending behavior in real time, and receive automatic financial status alerts.
 
 ---
